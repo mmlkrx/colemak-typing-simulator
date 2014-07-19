@@ -1,0 +1,14 @@
+@import url(http://fonts.googleapis.com/css?family=Molengo);
+@import url(http://fonts.googleapis.com/css?family=Lekton);
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Molengo', Georgia, Times, serif;
+    font-size: 56px;
+    line-height: 80px;
+}
+ 
+p {
+    font-family: 'Lekton', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+}
