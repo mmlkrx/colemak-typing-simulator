@@ -9,19 +9,36 @@ body, h1, p, a, textarea {
   padding: 0;
 }
 
-.box-container {
-  width: 50%;
-  margin: auto;
-  margin-top: 20%;
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin-bottom: 2em;
 }
 
-.text-box input, .translation-box {
+.box-container {
+  width: 35%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.text-box textarea, .translation-box {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
   width: 100%;
   margin-bottom: 3em;
   line-height: 2em;
+  padding: .5em;
+  min-height: 6em;
+  border-color: #D7D7D7;
+}
+
+.text-box textarea:focus {
+  outline-width: 2px;
 }
 
 .translation-box {
-  border: 1px solid grey;
-  min-height: 3em;
+  font-size: 16px;
+  border: 1px solid #CBCBCB;
+  background-color: ivory;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
 }

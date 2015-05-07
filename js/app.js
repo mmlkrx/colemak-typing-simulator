@@ -2,7 +2,7 @@ var TextBox = React.createClass({
     render: function() {
         return (
             <div className="text-box">
-                <input type="text" placeholder="Please enter your text..." onChange={this.props.callback} value={this.props.transformedColemakTranslation} />
+                <textarea placeholder={this.props.placeholder} onChange={this.props.callback} value={this.props.transformedColemakTranslation} />
             </div>
         );
     }
@@ -48,8 +48,9 @@ var BoxContainer = React.createClass({
         var colemak = this.props.colemak;
         var rawValue = e.target.value;
         var outputText = this.state.outputText;
+        var userHitBackspace = rawValue.length > this.state.outputText.length;
 
-        if (rawValue.length > this.state.outputText.length) {
+        if (userHitBackspace) {
             var rawChar = rawValue.charAt(rawValue.length - 1);
             var colertyValue = qwerty.indexOf(rawChar) >= 0 ? colemak.charAt(qwerty.indexOf(rawChar)) : rawChar;
             this.setState({outputText: outputText + colertyValue});
@@ -61,6 +62,7 @@ var BoxContainer = React.createClass({
     render: function() {
         return (
             <div className="box-container">
+                <h2>Colemak Typing Simulator</h2>
                 <TextBox placeholder="Please enter your text..." callback={this.translateInputToColemak} />
                 <TranslationBox colemakTranslation={this.state.inputText} />
                 <TextBox placeholder="Type here to see the magic happen..." callback={this.transformColemakTranslation} transformedColemakTranslation={this.state.outputText} />
@@ -68,3 +70,5 @@ var BoxContainer = React.createClass({
         );
     }
 });
+
+React.render(<BoxContainer />, document.getElementById('content'));
