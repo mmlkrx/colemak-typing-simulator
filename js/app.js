@@ -31,7 +31,7 @@ var BoxContainer = React.createClass({
         };
     },
 
-    translateInputToColemak: function() {
+    translateInputToColemak: function(e) {
         var qwerty  = this.props.qwerty;
         var colerty = this.props.colerty;
         var rawValue = e.target.value;
@@ -43,8 +43,19 @@ var BoxContainer = React.createClass({
         this.setState({inputText: translatedColemak});
     },
 
-    transformColemakTranslation: function() {
-        //Do more stuff
+    transformColemakTranslation: function(e) {
+        var qwerty  = this.props.qwerty;
+        var colemak = this.props.colemak;
+        var rawValue = e.target.value;
+        var outputText = this.state.outputText;
+
+        if (rawValue.length > this.state.outputText.length) {
+            var rawChar = rawValue.charAt(rawValue.length - 1);
+            var colertyValue = qwerty.indexOf(rawChar) >= 0 ? colemak.charAt(qwerty.indexOf(rawChar)) : rawChar;
+            this.setState({outputText: outputText + colertyValue});
+        } else {
+            this.setState({outputText: outputText.substring(0, (outputText.length -1))});
+        }
     },
 
     render: function() {
