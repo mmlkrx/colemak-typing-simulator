@@ -23,8 +23,24 @@ var BoxContainer = React.createClass({
         return {inputText: '', outputText: ''}
     },
 
+    getDefaultProps: function() {
+        return {
+            qwerty: 'qwertyuiopasdfghjkl;zxcvbnmQWERTYUIOPASDFGHJKL:ZXCVBNM',
+            colemak: 'qwfpgjluy;arstdhneiozxcvbkmQWFPGJLUY:ARSTDHNEIOZXCVBKM',
+            colerty: 'qwksfoil;radgethynupzxcvbjmQWKSFOIL;RADGETHYNUPZXCVBJM'
+        };
+    },
+
     translateInputToColemak: function() {
-        //Do stuff
+        var qwerty  = this.props.qwerty;
+        var colerty = this.props.colerty;
+        var rawValue = e.target.value;
+        var translatedColemak = '';
+
+        for(var i = 0; i < rawValue.length; i++) {
+            translatedColemak += (qwerty.indexOf(rawValue.charAt(i)) >= 0 ? colerty.charAt(qwerty.indexOf(rawValue.charAt(i))) : rawValue.charAt(i));
+        }
+        this.setState({inputText: translatedColemak});
     },
 
     transformColemakTranslation: function() {
