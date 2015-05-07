@@ -1,0 +1,27 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body, h1, p, a, textarea {
+  margin: 0;
+  padding: 0;
+}
+
+.box-container {
+  width: 50%;
+  margin: auto;
+  margin-top: 20%;
+}
+
+.text-box input, .translation-box {
+  width: 100%;
+  margin-bottom: 3em;
+  line-height: 2em;
+}
+
+.translation-box {
+  border: 1px solid grey;
+  min-height: 3em;
+}

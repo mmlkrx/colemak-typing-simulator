@@ -1,7 +1,7 @@
 var TextBox = React.createClass({
     render: function() {
         return (
-            <div className="text-box input-box">
+            <div className="text-box">
                 <input type="text" placeholder="Please enter your text..." onChange={this.props.callback} value={this.props.transformedColemakTranslation} />
             </div>
         );
