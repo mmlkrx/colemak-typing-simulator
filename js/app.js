@@ -1,8 +1,8 @@
 var TextBox = React.createClass({
   render: function() {
     return (
-      <div className="text-box">
-        <textarea placeholder={this.props.placeholder} id={this.props.id} onChange={this.props.callback} value={this.props.transformedColemakTranslation} />
+      <div className="text-box" id={this.props.id} >
+        <textarea placeholder={this.props.placeholder} onChange={this.props.callback} value={this.props.transformedColemakTranslation} />
       </div>
     );
   }
@@ -63,10 +63,10 @@ var BoxContainer = React.createClass({
     var inputLabelText = ''
     return (
       <div className="box-container">
-        <h2>Colemak Typing Simulator</h2>
-        <TextBox placeholder="Please enter your text..." callback={this.translateInputToColemak} />
+        <h1 id="title">Colemak Typing Simulator</h1>
+        <TextBox placeholder="Please enter your text..." callback={this.translateInputToColemak} id="input"/>
         <TranslationBox colemakTranslation={this.state.inputText} />
-        <TextBox placeholder="Type here to see the magic happen..." callback={this.transformColemakTranslation} transformedColemakTranslation={this.state.outputText} />
+        <TextBox placeholder="Type here to see the magic happen..." callback={this.transformColemakTranslation} transformedColemakTranslation={this.state.outputText} id="output" />
       </div>
     );
   }
