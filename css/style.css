@@ -16,9 +16,9 @@ h2 {
 }
 
 .box-container {
-  width: 35%;
+  width: 28em;
   margin: auto;
-  margin-top: 10%;
+  margin-top: 8em;
 }
 
 .text-box textarea, .translation-box {
@@ -28,7 +28,7 @@ h2 {
   margin-bottom: 3em;
   line-height: 2em;
   padding: .5em;
-  min-height: 6em;
+  min-height: 8em;
   border-color: #D7D7D7;
 }
 
