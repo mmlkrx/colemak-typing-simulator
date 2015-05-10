@@ -20,42 +20,55 @@ var TranslationBox = React.createClass({
 
 var BoxContainer = React.createClass({
   getInitialState: function() {
-    return {inputText: '', outputText: ''}
+    return {translatedText: '', transformedText: ''}
   },
 
   getDefaultProps: function() {
     return {
       qwerty: 'qwertyuiopasdfghjkl;zxcvbnmQWERTYUIOPASDFGHJKL:ZXCVBNM',
-      colemak: 'qwfpgjluy;arstdhneiozxcvbkmQWFPGJLUY:ARSTDHNEIOZXCVBKM',
-      colerty: 'qwksfoil;radgethynupzxcvbjmQWKSFOIL;RADGETHYNUPZXCVBJM'
+      colemak: 'qwksfoil;radgethynupzxcvbjmQWKSFOIL;RADGETHYNUPZXCVBJM'
     };
   },
 
-  translateInputToColemak: function(e) {
-    var qwerty  = this.props.qwerty;
-    var colerty = this.props.colerty;
-    var rawValue = e.target.value;
-    var translatedColemak = '';
+  validLetter: function(char) {
+    return this.props.qwerty.indexOf(char) >= 0;
+  },
 
-    for(var i = 0; i < rawValue.length; i++) {
-      translatedColemak += (qwerty.indexOf(rawValue.charAt(i)) >= 0 ? colerty.charAt(qwerty.indexOf(rawValue.charAt(i))) : rawValue.charAt(i));
+  translateInputToColemak: function(e) {
+    var targetValue = e.target.value;
+    this.setState({translatedText: this.translateText(targetValue, 'qwerty', 'colemak')});
+  },
+
+  translateText: function(text, from, to) {
+    switch (from) {
+      case 'colemak':
+        from = this.props.colemak;
+        to = this.props.qwerty;
+        break;
+      case 'qwerty':
+        from = this.props.qwerty;
+        to = this.props.colemak;
+        break;
     }
-    this.setState({inputText: translatedColemak});
+
+    var translatedText = '';
+    for (var i = 0; i < text.length; i++) {
+      translatedText += (this.validLetter(text.charAt(i)) ? to.charAt(from.indexOf(text.charAt(i))) : text.charAt(i));
+    }
+    return translatedText;
   },
 
   transformColemakTranslation: function(e) {
-    var qwerty  = this.props.qwerty;
-    var colemak = this.props.colemak;
-    var rawValue = e.target.value;
-    var outputText = this.state.outputText;
-    var userHitBackspace = rawValue.length > this.state.outputText.length;
+    var targetValue = e.target.value;
+    var transformedText = this.state.transformedText;
+    var userAddedText = targetValue.length > transformedText.length;
+    var userDeletedText = targetValue.length < transformedText.length;
 
-    if (userHitBackspace) {
-      var rawChar = rawValue.charAt(rawValue.length - 1);
-      var colertyValue = qwerty.indexOf(rawChar) >= 0 ? colemak.charAt(qwerty.indexOf(rawChar)) : rawChar;
-      this.setState({outputText: outputText + colertyValue});
-    } else {
-      this.setState({outputText: outputText.substring(0, (outputText.length -1))});
+    if (userDeletedText) {
+      this.setState({transformedText: transformedText.substring(0, targetValue.length)})
+    } else if (userAddedText) {
+      var simpleDifference = targetValue.substring(transformedText.length, targetValue.length)
+      this.setState({transformedText: transformedText + this.translateText(simpleDifference, 'colemak', 'qwerty')})
     }
   },
 
@@ -65,8 +78,8 @@ var BoxContainer = React.createClass({
       <div className="box-container">
         <h1 id="title">Colemak Typing Simulator</h1>
         <TextBox placeholder="Please enter your text..." callback={this.translateInputToColemak} id="input"/>
-        <TranslationBox colemakTranslation={this.state.inputText} />
-        <TextBox placeholder="Type here to see the magic happen..." callback={this.transformColemakTranslation} transformedColemakTranslation={this.state.outputText} id="output" />
+        <TranslationBox colemakTranslation={this.state.translatedText} />
+        <TextBox placeholder="Type here to see the magic happen..." callback={this.transformColemakTranslation} transformedColemakTranslation={this.state.transformedText} id="output" />
       </div>
     );
   }
