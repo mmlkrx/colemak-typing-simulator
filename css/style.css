@@ -1,0 +1,79 @@
+*, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1#title {
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin-bottom: 2.5em;
+  letter-spacing: .5px;
+}
+
+.box-container {
+  width: 28em;
+  margin: auto;
+  margin-top: 6em;
+}
+
+.text-box {
+  position: relative;
+}
+
+.text-box textarea, .translation-box {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  margin-bottom: 3em;
+  line-height: 2em;
+  padding: 1em;
+  padding-top: .6em;
+  min-height: 8em;
+  border-color: #D7D7D7;
+}
+
+.text-box textarea {
+  resize: vertical;
+}
+
+.text-box textarea:focus {
+  outline-width: 1px;
+}
+
+#input:before, #output:before {
+  content: "Type in text you want to convert to Colemak ~>";
+  font-style: italic;
+  text-align: justify;
+  color: #151515;
+  padding: .9em 2em 0 0;
+  width: 11em;
+  height: 7em;
+  position: absolute;
+  left: -10em;
+  opacity: 0;
+  -webkit-transition: left .2s ease, opacity .2s ease;
+  -moz-transition: left .2s ease, opacity .2s ease;
+  -o-transition: left .2s ease, opacity .2s ease;
+  transition: left .2s ease, opacity .2s ease;
+}
+
+#output:before {
+  content: "Type in the Colemak translation from the yellow box ~>";
+}
+
+#output:hover:before, #input:hover:before {
+  left: -11em;
+  opacity: 1;
+}
+
+.translation-box {
+  font-size: 16px;
+  border: 1px solid #CBCBCB;
+  background-color: ivory;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  width: 102%;
+  position: relative;
+  left: calc(-2% / 2);
+  min-height: 8.5em;
+}
